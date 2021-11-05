@@ -1,0 +1,40 @@
+.pagination {
+    width: 100%;
+    display: flex;
+    margin-top: 24px;
+}
+
+.pagination .counter {
+    flex: 0 0 60%;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.pagination .pagination-fast-nav {
+    flex: 0 0 40%;
+    text-align: right;
+}
+
+.pagination-fast-nav button {
+    background: var(--dark-gray);
+    border: none;
+    color: white;
+    width: 116px;
+    height: 25px;
+    margin-right: 10px;
+    display: inline;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.pagination-fast-nav button:hover {
+    box-shadow: 2px 2px 6px rgba(0,0,0,.5);
+    transform: translateY(-1px);
+    -webkit-transform: translateY(-1px);
+}
+
+.pagination-fast-nav button:active {
+    box-shadow: 2px 2px 6px rgba(0,0,0,.5);
+    transform: translateY(1px);
+    -webkit-transform: translateY(1px);
+}

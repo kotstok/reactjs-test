@@ -1,0 +1,128 @@
+.article {
+    width: 280px;
+    flex: 0 0 280px;
+    margin-left: 18px;
+    margin-bottom: 18px;
+    height: 425px;
+    position: relative;
+    background-repeat: no-repeat;
+}
+
+.related {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 20px;
+    font-size: 10px;
+    min-width: 50px;
+    padding: 5px 15px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.article-header {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 110px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 28px;
+    color: #FFFFFF;
+}
+
+.article-summary {
+    font-size: 14px;
+    color: white;
+    left: 20px;
+    right: 20px;
+    bottom: 40px;
+    position: absolute;
+}
+
+.article-time {
+    color: white;
+    bottom: 20px;
+    left: 20px;
+    position: absolute;
+}
+
+.article-main img,
+.article img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(28, 58, 82, 0) 0%, #05141B 75.5%);
+    opacity: 0.49;
+    border-radius: 6px;
+}
+
+.article-main {
+    max-width: 478px;
+    height: 100%;
+    max-height: 628px;
+    position: relative;
+}
+
+.article-label {
+    position: absolute;
+    right: 34px;
+    width: 90px;
+    height: 16px;
+    top: 34px;
+    background: #B73556;
+    color: white;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 9px;
+    letter-spacing: 0.06em;
+}
+
+.article-list {
+    width: 100%;
+    margin: 0;
+    padding-left: 6px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.article-list-footer {
+    padding-left: 24px;
+}
+
+.article-bookmark {
+    position: absolute;
+    cursor: pointer;
+    right: 20px;
+    bottom: 20px;
+}
+
+.page-header {
+    margin: 40px 0;
+    font-size: 20px;
+}
+
+.article-bookmark svg {
+    width: 12px;
+    height: 12px;
+}
+
+@media screen and (max-width: 1440px){
+    .article {
+        width: 47.55555%;
+        flex: 0 0 47.55555%;
+    }
+}
