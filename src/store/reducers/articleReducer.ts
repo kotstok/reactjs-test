@@ -47,8 +47,8 @@ export const articleReducer = (
       if (action.payload.trim().length > 0) {
         state.articles.forEach((article, index) => {
           if (
-            article.headline.search(action.payload) !== -1 ||
-            article.summary.search(action.payload) !== -1
+            article.headline.toLowerCase().search(action.payload.toLowerCase()) !== -1 ||
+            article.summary.toLowerCase().search(action.payload.toLowerCase()) !== -1
           ) {
             result.push(index);
           }

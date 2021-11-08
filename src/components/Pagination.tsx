@@ -38,7 +38,7 @@ export function Pagination(props: PaginationType): JSX.Element {
       <div className="counter">
         <span>
           {props.page * props.perPage - props.perPage + 1}-
-          {props.perPage * props.page}
+          {props.perPage * props.page > props.totalCount ? props.totalCount : props.perPage * props.page}
         </span>
         <span className="text-second-min">
           &nbsp;&nbsp;out of {props.totalCount}

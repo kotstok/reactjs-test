@@ -35,7 +35,7 @@ export default function News(props: RouteComponentProps): JSX.Element {
         <MainArticle
           article={articles.articles[0]}
           showLabel={articles.page > 1}
-          isBookmark={bookmarks.bookmarks.includes(articles.articles[0].id)}
+          isBookmark={bookmarks.bookmarks[articles.articles[0].id] || false}
         />
       </div>
       <div id="content">

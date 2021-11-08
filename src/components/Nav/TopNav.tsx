@@ -3,14 +3,13 @@ import { SearchBox } from 'components/SearchBox';
 import { Link } from 'react-router-dom';
 import { routes } from 'routes';
 import {useActions} from "hooks/useActions";
-import {setArticleSearch} from "store/action-creator/articles";
 
 export default function TopNav(): JSX.Element {
+  const { setArticleSearch } = useActions();
+
   const activeRoute = (routeName: string): string => {
     return window.location.pathname === routeName ? ' active' : '';
   };
-
-  const {setArticleSearch} = useActions();
 
   return (
     <nav className="app-nav">
@@ -27,7 +26,7 @@ export default function TopNav(): JSX.Element {
         )}
       </ul>
       <div className="nav-right-items">
-        <SearchBox />
+        {window.location.pathname !== "/news" ? null : <SearchBox onChange={setArticleSearch} />}
       </div>
     </nav>
   );

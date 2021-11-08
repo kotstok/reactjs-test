@@ -15,70 +15,77 @@ interface ArticleListType extends RouteComponentProps {
 export function ArticleList(props: ArticleListType): JSX.Element {
   const { articles, bookmarks } = useTypeSelector((state) => state);
   const { setArticlePage } = useActions();
+  let totalCount;
 
   useEffect(() => {
     setArticlePage(PageFromUrl(), props.limit || undefined);
-  }, []);
+    // eslint-disable-next-line
+  }, [props.limit]);
 
   const handleChangePage = (nextPage: number) => {
     setArticlePage(nextPage);
     props.history.push({ search: '?p=' + nextPage });
   };
 
-  const list = [];
-  // + 1 offset main article
   const offset = articles.page * articles.limit - articles.limit + 1;
 
-  if (props.onlyBookmarks) {
-    const articlesBm = articles.articles.filter((article) =>
-      bookmarks.bookmarks.includes(article.id)
-    );
+  const bookmarkElements = (): [number, JSX.Element[]] => {
+    const _list = [];
+    const articlesInBookmarks = articles.articles.filter((article) => bookmarks.bookmarks[article.id] || false);
+    totalCount = articlesInBookmarks.length;
+
     // ignore firs new item
-    for (let i = offset - 1; i < articlesBm.length; i++) {
+    for (let i = offset - 1; i < articlesInBookmarks.length; i++) {
       if (i === offset + articles.limit) {
         break;
       }
 
       // only bookmarks
-      list.push(
+      _list.push(
         <Article
-          key={articlesBm[i].id}
-          article={articlesBm[i]}
+          key={articlesInBookmarks[i].id}
+          article={articlesInBookmarks[i]}
           isBookmark={true}
         />
       );
     }
-  } else {
+
+    return [totalCount, _list];
+  };
+
+  const newsArticles = (): [number, JSX.Element[]] => {
     // show all articles
+    const e = [];
     for (let i = offset; i < articles.articles.length; i++) {
       if (i === offset + articles.limit) {
         break;
       }
-      list.push(
+      e.push(
         <Article
           key={articles.articles[i].id}
           article={articles.articles[i]}
-          isBookmark={bookmarks.bookmarks.includes(articles.articles[i].id)}
+          isBookmark={bookmarks.bookmarks[articles.articles[i].id] || false}
         />
       );
     }
-  }
 
-  if (0 === list.length) {
+    return [articles.articles.length, e];
+  };
+
+  const [total, elements] = props.onlyBookmarks ? bookmarkElements() : newsArticles();
+
+  if (0 === total) {
     return <NoDataFound />;
   }
 
   return (
     <React.Fragment>
-      <div className="article-list">{list}</div>
-      <div className="article-list-footer">
+      <div className='article-list'>{elements}</div>
+      <div className='article-list-footer'>
         <Pagination
           page={articles.page}
           perPage={articles.limit}
-          totalCount={
-            (props.onlyBookmarks ? bookmarks.bookmarks : articles.articles)
-              .length - 1
-          }
+          totalCount={total - 1}
           onNext={handleChangePage}
           onPrev={handleChangePage}
         />

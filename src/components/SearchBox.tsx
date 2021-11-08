@@ -1,27 +1,29 @@
 import React from 'react';
 import { ReactComponent as Icon } from 'assets/ico/search.svg';
-import { useActions } from '../hooks/useActions';
 import {useTypeSelector} from "../hooks/useTypeSelector";
 
-export function SearchBox(): JSX.Element {
-  const state = useTypeSelector((state) => state.articles);
-  const [value, setValue] = React.useState(state.search);
-  const { setArticleSearch } = useActions();
+type SearchBoxType = {
+  onChange: (value: string) => void
+}
+
+export function SearchBox(props: SearchBoxType): JSX.Element {
+  const search = useTypeSelector((state) => state.articles.search);
+  const [value, setValue] = React.useState(search);
 
   React.useEffect(() => {
-    if (value !== state.search) {
-      setValue(state.search);
+    if (value !== search) {
+      setValue(search);
     }
-  }, [state.search]);
+  }, [search, value]);
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
-    setArticleSearch(e.currentTarget.value);
+    props.onChange(e.currentTarget.value);
   };
 
   return (
     <div className="search-box">
-      <input value={value} placeholder="Search" onChange={handleChange} disabled={window.location.pathname !== "/news"} />
+      <input value={value} placeholder="Search" onChange={handleChange} />
       <Icon />
     </div>
   );

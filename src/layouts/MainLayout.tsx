@@ -7,8 +7,10 @@ import { useActions } from 'hooks/useActions';
 export default function MainLayout(props: RouteComponentProps): JSX.Element {
   const { fetchArticles } = useActions();
 
+  // bootstrap
   React.useEffect(() => {
     fetchArticles();
+    // eslint-disable-next-line
   }, []);
 
   return (

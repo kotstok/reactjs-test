@@ -21,8 +21,8 @@ export default function ArticlesSearch(
     }
     if (window.location.pathname !== homepage) {
       setArticleSearch("");
-      // props.history.push({ pathname: homepage });
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleChangePage = (nextPage: number) => {
@@ -42,7 +42,7 @@ export default function ArticlesSearch(
       <Article
         key={_article.id}
         article={_article}
-        isBookmark={bookmarks.bookmarks.includes(_article.id)}
+        isBookmark={bookmarks.bookmarks[_article.id] || false}
       />
     );
   }

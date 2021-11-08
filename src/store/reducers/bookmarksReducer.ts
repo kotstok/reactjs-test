@@ -5,7 +5,7 @@ import {
 } from 'types/bookmark';
 
 const initialState: BookmarksState = {
-  bookmarks: []
+  bookmarks: {}
 };
 
 export const bookmarksReducer = (
@@ -15,11 +15,17 @@ export const bookmarksReducer = (
   switch (action.type) {
     case BookmarksActionsType.SET_BOOKMARK:
       return {
-        bookmarks: [...state.bookmarks, action.payload]
+        bookmarks: {
+          ...state.bookmarks,
+          [action.payload]: true
+        }
       } as BookmarksState;
     case BookmarksActionsType.REMOVE_BOOKMARK:
       return {
-        bookmarks: state.bookmarks.filter((id) => id !== action.payload)
+        bookmarks: {
+          ...state.bookmarks,
+          [action.payload]: false
+        }
       } as BookmarksState;
     default:
       return state;

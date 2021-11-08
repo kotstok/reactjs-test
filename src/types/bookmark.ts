@@ -1,5 +1,5 @@
 export interface BookmarksState {
-  bookmarks: number[];
+  bookmarks: {[key: number]: boolean};
 }
 
 export enum BookmarksActionsType {

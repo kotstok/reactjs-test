@@ -1,7 +1,9 @@
 import * as ArticleActionCreators from './articles';
 import * as BookmarksActionCreators from './bookmarks';
 
-export default {
+const modules = {
   ...ArticleActionCreators,
   ...BookmarksActionCreators
 };
+
+export default modules;
